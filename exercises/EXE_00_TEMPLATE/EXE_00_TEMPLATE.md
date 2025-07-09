@@ -9,11 +9,10 @@
 1. [Overview](#overview)  
 2. [Objectives](#objectives)  
 3. [Prerequisites](#prerequisites)  
-4. [Lab Setup](#lab-setup)  
-5. [Exercises](#exercises)  
-6. [Submission & Verification](#submission--verification)  
-7. [Cleanup](#cleanup)  
-8. [Further Reading](#further-reading)  
+4. [Exercises](#exercises)  
+5. [Submission & Verification](#submission--verification)  
+6. [Cleanup](#cleanup)  
+7. [Further Reading](#further-reading)  
 
 ---
 
