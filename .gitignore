@@ -1,0 +1,125 @@
+# Build folders
+[Bb]in/
+[Oo]bj/
+
+# VS workspace and user-specific files
+.vs/
+*.suo
+*.user
+*.userprefs
+*.userosscache
+*.sln.docstates
+
+# Rider IDE
+.idea/
+
+# Build results
+*.dll
+*.exe
+*.app
+*.appref-ms
+*.pdb
+*.cache
+*.ilk
+*.obj
+*.lib
+*.exp
+*.ipdb
+*.iobj
+*.idb
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+*.cachefile
+
+# SQL Server files
+*.mdf
+*.ldf
+*.ndf
+
+# OS-generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# NuGet packages (you can remove this if you commit your packages folder)
+packages/
+*.nupkg
+# Uncomment if you have custom MSBuild props/targets in packages:
+# !packages/*.props
+# !packages/*.targets
+
+# Package restore log
+*.restore.log
+
+# Resharper
+_ReSharper*/
+*.ReSharper.*
+
+# DotCover
+*.dotCover
+
+# TeamCity
+_TeamCity*
+
+# VisualStudio Code settings (if you happen to use VS Code too)
+.vscode/
+
+# NPM (if you use Node in your solution)
+node_modules/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Uncomment if you use coverage tools:
+# coverage/
+# *.lcov
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Windows image file caches
+Thumbs.db
+
+# 1. Terraform State & Lock Files
+*.tfstate
+*.tfstate.*
+*.tfvars               # Don’t commit your real tfvars
+.terraform/            # Terraform local module and state folder
+# 1. Local plugin and module cache
+**/.terraform/*
+
+# 2. Terraform state files
+*.tfstate
+*.tfstate.backup
+
+# 3. Crash logs
+crash.log
+
+# 4. Terraform variable definitions that may contain secrets
+*.tfvars
+!example.tfvars             # if you ship an example, keep that one
+
+# 5. Plan output files
+*.tfplan
+
+# 6. Override files (local-only)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# 7. CLI configuration (if you use per-user config files)
+.terraformrc
+terraform.rc
+
+docs/*
