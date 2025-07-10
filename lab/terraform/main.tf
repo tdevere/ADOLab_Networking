@@ -41,14 +41,14 @@ resource "azurerm_network_security_group" "agent_nsg" {
     destination_address_prefix = "*"
   }
   security_rule {
-    name                       = "AllowRDP"
-    priority                   = 1002
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "3389"
-    source_address_prefix      = "*"
+    name = "AllowRDP"
+    priority = 1002
+    direction = "Inbound"
+    access = "Allow"
+    protocol = "Tcp"
+    source_port_range = "*"
+    destination_port_range = "3389"
+    source_address_prefix = "*"
     destination_address_prefix = "*"
     }
   }
@@ -85,8 +85,8 @@ resource "azurerm_linux_virtual_machine" "agent_vm" {
   resource_group_name   = azurerm_resource_group.agent_rg.name
   network_interface_ids = [azurerm_network_interface.vm_nic.id]
   size                  = var.vm_size
-  admin_username        = var.admin_username
-  admin_password        = var.admin_password
+  admin_username = var.admin_username
+  admin_password = var.admin_password
   disable_password_authentication = false
 
 
