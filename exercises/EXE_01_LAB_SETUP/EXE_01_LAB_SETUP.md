@@ -98,7 +98,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform la
 
     ```bash
     terraform plan \
-      -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key.pub)" \
+      -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key_rsa.pub)" \
       -out=tfplan
     ```
 
@@ -125,7 +125,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform la
   * **Linux agent**
 
     ```bash
-    ssh -i ~/.ssh/terraform_lab_key \
+    ssh -i ~/.ssh/terraform_lab_key_rsa \
         azureuser@$(terraform output -raw agent_vm_public_ip)
     ```
 
@@ -155,7 +155,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform la
 > Do Not Perform this operation, unless this is the end of your exercises. But failure to remove these resources will impact your Azure budget.
 
 ```bash
-terraform destroy -auto-approve
+terraform destroy -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key_rsa.pub)" -auto-approve
 rm -f terraform.tfstate* terraform.tfstate.backup
 ```
 
