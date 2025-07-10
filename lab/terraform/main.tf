@@ -50,8 +50,8 @@ resource "azurerm_network_security_group" "agent_nsg" {
     destination_port_range = "3389"
     source_address_prefix = "*"
     destination_address_prefix = "*"
-    }
   }
+}
 
 resource "azurerm_subnet_network_security_group_association" "agent_assoc" {
   subnet_id                 = azurerm_subnet.agent_subnet.id
