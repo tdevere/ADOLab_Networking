@@ -92,6 +92,17 @@ resource "azurerm_linux_virtual_machine" "agent_vm" {
     sku       = "20_04-lts"
     version   = "latest"
   }
+  
+custom_data = base64encode(<<EOF
+#!/bin/bash
+apt-get update
+apt-get install -y xrdp
+systemctl enable xrdp
+systemctl start xrdp
+ufw allow 3389
+EOF
+  )
+
 }
 
 ###############################################################################
