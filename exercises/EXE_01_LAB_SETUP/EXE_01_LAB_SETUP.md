@@ -44,19 +44,15 @@ This guide automates the deployment of the **Agent** and **Connectivity** enviro
 
 ### Generate SSH Key Pair (If Needed)
 
-If you don’t yet have an SSH key pair at `~/.ssh/terraform_lab_key` and `~/.ssh/terraform_lab_key.pub`:
+If you don’t yet have an SSH key pair at `~/.ssh/terraform_lab_key_rsa` and `~/.ssh/terraform_lab_key_rsa.pub`:
 
 ```bash
-ssh-keygen -t ed25519 \
-  -f ~/.ssh/terraform_lab_key \
-  -N "" \
-  -C "terraform lab key"
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform lab key RSA"
 ````
 
-> **Why Ed25519?**
+> **Using RSA instead Ed25519?**
 >
->   * Modern, smaller keys with strong security
->   * Faster authentication than RSA
+>   * Only RSA SSH keys are supported by Azure
 
 -----
 
