@@ -58,6 +58,12 @@ variable "admin_username" {
   type        = string
 }
 
+variable "admin_password" {
+  description = "The admin password for the VM"
+  type        = string
+  sensitive   = true
+}
+
 variable "admin_ssh_key" {
   description = "Public SSH key for VM login"
   type        = string
