@@ -40,6 +40,19 @@ resource "azurerm_network_security_group" "agent_nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+  
+  security_rule {
+    name                       = "AllowRDP"
+    priority                   = 1002
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
 }
 
 resource "azurerm_subnet_network_security_group_association" "agent_assoc" {
@@ -75,6 +88,9 @@ resource "azurerm_linux_virtual_machine" "agent_vm" {
   network_interface_ids = [azurerm_network_interface.vm_nic.id]
   size                  = var.vm_size
   admin_username        = var.admin_username
+  admin_password        = var.admin_password
+  disable_password_authentication = false
+
 
   admin_ssh_key {
     username   = var.admin_username
@@ -93,15 +109,19 @@ resource "azurerm_linux_virtual_machine" "agent_vm" {
     version   = "latest"
   }
   
-custom_data = base64encode(<<EOF
-#!/bin/bash
-apt-get update
-apt-get install -y xrdp
-systemctl enable xrdp
-systemctl start xrdp
-ufw allow 3389
-EOF
-  )
+ 
+  custom_data = base64encode(<<EOF
+  #!/bin/bash
+  apt-get update
+  apt-get install -y xrdp xfce4 xfce4-goodies
+  echo xfce4-session > /home/${var.admin_username}/.xsession
+  chown ${var.admin_username}:${var.admin_username} /home/${var.admin_username}/.xsession
+  systemctl enable xrdp
+  systemctl start xrdp
+  ufw allow 3389
+  EOF
+  )
+
 
 }
 
