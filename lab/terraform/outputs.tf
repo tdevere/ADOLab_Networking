@@ -28,8 +28,8 @@ output "agent_vm_public_ip" {
 }
 
 output "windows_admin_password" {
-  value     = azurerm_linux_virtual_machine.agent_vm.admin_password
-  sensitive = true
+  value     = azurerm_linux_virtual_machine.agent_vm.admin_password
+  sensitive = true
 }
 
 

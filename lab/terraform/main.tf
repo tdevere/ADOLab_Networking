@@ -40,20 +40,18 @@ resource "azurerm_network_security_group" "agent_nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-  
   security_rule {
-    name                       = "AllowRDP"
-    priority                   = 1002
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "3389"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-}
+    name                       = "AllowRDP"
+    priority                   = 1002
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+    }
+  }
 
 resource "azurerm_subnet_network_security_group_association" "agent_assoc" {
   subnet_id                 = azurerm_subnet.agent_subnet.id
@@ -121,8 +119,6 @@ resource "azurerm_linux_virtual_machine" "agent_vm" {
   ufw allow 3389
   EOF
   )
-
-
 }
 
 ###############################################################################
