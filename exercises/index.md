@@ -11,10 +11,9 @@
 | Exercise No. | Name / Path                                                                                     | Description                                                                                                   |
 |-------------:|-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | 01           | [Lab Setup](./EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md)                                             | Clone the lab repository, configure `terraform.tfvars`, and deploy both Agent and Connectivity labs            |
-| 02           | [Linux Agent Configuration](./EXE_02_SSH_LINUX_AGENT/EXE_02_SSH_LINUX_AGENT.md)                  | SSH into the Linux agent VM using your SSH key and register it with your Azure DevOps organization’s pool     |
-| 03           | [Windows Configuration](./EXE_03_RDP_WINDOWS_AGENT/EXE_03_RDP_WINDOWS_AGENT.md)                  | RDP into the Windows agent VM and register it with your Azure DevOps organization’s pool                     |
-| 04           | [Configure Service Connection](./EXE_10_SERVICE_CONNECTION/EXE_10_SERVICE_CONNECTION.md)         | Create an Azure DevOps service connection granting pipeline access to the lab’s Key Vault                    |
-| 05           | [Configure Pipeline](./EXE_11_PIPELINE_CONFIG/EXE_11_PIPELINE_CONFIG.md)                         | Create or update a pipeline in Azure DevOps using the provided YAML and link it to the Key Vault connection |
+| 02           | [Configure Agent Pool](./EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md)                  | Createa ADO Agent Pool and Add Agents |
+| 03           | [Configure Service Connection](./EXE_10_SERVICE_CONNECTION/EXE_10_SERVICE_CONNECTION.md)         | Create an Azure DevOps service connection granting pipeline access to the lab’s Key Vault                    |
+| 04           | [Configure Pipeline](./EXE_11_PIPELINE_CONFIG/EXE_11_PIPELINE_CONFIG.md)                         | Create or update a pipeline in Azure DevOps using the provided YAML and link it to the Key Vault connection |
 
 ---
 
@@ -22,9 +21,9 @@
 
 | Exercise No. | Name / Path                                                                                         | Description                                                                                                  |
 |-------------:|-----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| 06           | [Private Endpoint Access Denied](./EXE_06_PRIVATE_ENDPOINT_BLOCK/EXE_06_PRIVATE_ENDPOINT_BLOCK.md)   | Attempt to fetch a secret from Key Vault when the private endpoint configuration blocks access               |
-| 07           | [DNS Misresolution Simulation](./EXE_07_DNS_MISRESOLUTION/EXE_07_DNS_MISRESOLUTION.md)               | Use the misconfigured DNS A-record and observe pipeline failure due to wrong DNS resolution                   |
-| 08           | [NSG Firewall Simulation](./EXE_08_NSG_TEST/EXE_08_NSG_TEST.md)                                      | Temporarily block outbound traffic to Key Vault via NSG, then restore rules and verify connectivity           |
+| 05           | [Private Endpoint Access Denied](./EXE_06_PRIVATE_ENDPOINT_BLOCK/EXE_06_PRIVATE_ENDPOINT_BLOCK.md)   | Attempt to fetch a secret from Key Vault when the private endpoint configuration blocks access               |
+| 06           | [DNS Misresolution Simulation](./EXE_07_DNS_MISRESOLUTION/EXE_07_DNS_MISRESOLUTION.md)               | Use the misconfigured DNS A-record and observe pipeline failure due to wrong DNS resolution                   |
+| 07           | [NSG Firewall Simulation](./EXE_08_NSG_TEST/EXE_08_NSG_TEST.md)                                      | Temporarily block outbound traffic to Key Vault via NSG, then restore rules and verify connectivity           |
 
 ---
 
@@ -32,8 +31,8 @@
 
 | Exercise No. | Name / Path                                                                                 | Description                                                                              |
 |-------------:|---------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| 09           | [Retrieve a Key Vault Secret](./EXE_09_KEYVAULT_SECRET/EXE_09_KEYVAULT_SECRET.md)            | From the Linux agent, use the Azure CLI to fetch a secret from the lab’s Key Vault       |
-| 10           | [Validate Private Endpoint DNS](./EXE_10_DNS_CORRECT/EXE_10_DNS_CORRECT.md)                  | Resolve the Key Vault FQDN in the Private DNS zone and connect successfully             |
+| 08           | [Retrieve a Key Vault Secret](./EXE_09_KEYVAULT_SECRET/EXE_09_KEYVAULT_SECRET.md)            | From the Linux agent, use the Azure CLI to fetch a secret from the lab’s Key Vault       |
+| 09           | [Validate Private Endpoint DNS](./EXE_10_DNS_CORRECT/EXE_10_DNS_CORRECT.md)                  | Resolve the Key Vault FQDN in the Private DNS zone and connect successfully             |
 
 ---
 
@@ -41,7 +40,7 @@
 
 | Exercise No. | Name / Path                                                                                   | Description                                                                                         |
 |-------------:|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| 11           | [Inventory Script](./EXE_11_INVENTORY_SCRIPT/EXE_11_INVENTORY_SCRIPT.md)                      | Execute the PowerShell inventory script, then analyze the generated CSV/JSON to validate your setup |
+| 10           | [Inventory Script](./EXE_11_INVENTORY_SCRIPT/EXE_11_INVENTORY_SCRIPT.md)                      | Execute the PowerShell inventory script, then analyze the generated CSV/JSON to validate your setup |
 ---
 
 
