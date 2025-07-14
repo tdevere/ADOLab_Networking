@@ -44,7 +44,7 @@ This guide automates the deployment of the **Agent** and **Connectivity** enviro
 
 ### Generate SSH Key Pair (If Needed)
 
-If you don’t yet have an SSH key pair at `~/.ssh/terraform_lab_key_rsa` and `~/.ssh/terraform_lab_key_rsa.pub`:
+If you don’t yet have an SSH key pair at `~/.ssh/terraform_lab_key_rsa` and `~/.ssh/terraform_lab_key.pub`:
 
 ```bash
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform lab key RSA"
@@ -97,9 +97,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform la
 1.  Create a plan (we’ll override `admin_ssh_key` at plan time):
 
     ```bash
-    terraform plan \
-      -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key_rsa.pub)" \
-      -out=tfplan
+    terraform plan -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key.pub)" -out=tfplan
     ```
 
 2.  Apply the plan:
@@ -124,23 +122,48 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform la
 
   * **Linux agent**
 
-    ```bash
-    ssh -i ~/.ssh/terraform_lab_key_rsa \
-        azureuser@$(terraform output -raw agent_vm_public_ip)
-    ```
+1. **Check the Linux agent public IP**  
 
-    *Verify*: You land at a shell prompt without a password.
+  ```bash
+   terraform output -raw agent_vm_public_ip
+  ```
 
-  * **Windows agent**
+* If you see a valid IP (e.g. `52.x.y.z`), proceed to step 2.
+* If it’s blank, run:
 
-    ```powershell
-    mstsc /v:$(terraform output -raw agent_vm_public_ip)
-    ```
+  ```bash
+  terraform refresh -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key.pub)"
+  ```
 
-    Enter `azureuser` (or the `admin_username` you configured in Terraform) for the username and **`$(terraform output -raw windows_admin_password)`** for the password.
-    *Verify*: You see the Windows desktop.
+  then retry:
 
------
+  ```bash
+  terraform output -raw agent_vm_public_ip
+  ```
+
+2. **SSH to the Linux agent**
+
+   ```bash
+   ssh -i ~/.ssh/terraform_lab_key_rsa azureuser@$(terraform output -raw agent_vm_public_ip)
+   ```
+
+   *Verify*: You land at a shell prompt without entering a password.
+
+3. **RDP to the Windows agent**
+
+   ```powershell
+   mstsc /v:$(terraform output -raw agent_vm_public_ip)
+   ```
+
+   * Username: `azureuser` (or your `admin_username`)
+   * Password:
+
+     ```bash
+     terraform output -raw windows_admin_password
+     ```
+
+   *Verify*: You see the Windows desktop.
+
 
 ## Submission & Verification
 
@@ -148,18 +171,18 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform la
   * Attach a terminal log of a successful SSH session.
   * Attach a screenshot of a successful RDP session.
 
------
+
 
 ## Cleanup
 
 > Do Not Perform this operation, unless this is the end of your exercises. But failure to remove these resources will impact your Azure budget.
 
 ```bash
-terraform destroy -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key_rsa.pub)" -auto-approve
+terraform destroy -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key.pub)" -auto-approve
 rm -f terraform.tfstate* terraform.tfstate.backup
 ```
 
------
+
 
 ## Further Reading
 
