@@ -232,3 +232,48 @@ resource "azurerm_private_dns_a_record" "kv_a_misconfig" {
   ttl                 = 300
   records             = [var.wrong_kv_ip]
 }
+
+# Public IP for Windows VM
+resource "azurerm_public_ip" "win_public_ip" {
+  name                = "${var.agent_rg_name}-win-pip"
+  location            = azurerm_resource_group.agent_rg.location
+  resource_group_name = azurerm_resource_group.agent_rg.name
+  allocation_method   = "Dynamic"
+}
+
+# NIC for Windows VM
+resource "azurerm_network_interface" "win_nic" {
+  name                = "${var.agent_rg_name}-win-nic"
+  location            = azurerm_resource_group.agent_rg.location
+  resource_group_name = azurerm_resource_group.agent_rg.name
+
+  ip_configuration {
+    name                          = "ipconfig1"
+    subnet_id                     = azurerm_subnet.agent_subnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.win_public_ip.id
+  }
+}
+
+# Windows VM
+resource "azurerm_windows_virtual_machine" "agent_win" {
+  name                = "${var.vm_name}-win"
+  location            = azurerm_resource_group.agent_rg.location
+  resource_group_name = azurerm_resource_group.agent_rg.name
+  network_interface_ids = [azurerm_network_interface.win_nic.id]
+  size                = var.vm_size
+  admin_username      = var.admin_username
+  admin_password      = var.admin_password
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2019-Datacenter"
+    version   = "latest"
+  }
+}

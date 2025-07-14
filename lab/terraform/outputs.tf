@@ -33,6 +33,11 @@ output "windows_admin_password" {
   sensitive = true
 }
 
+output "windows_vm_public_ip" {
+  description = "Public IP of the Windows agent VM"
+  value       = azurerm_public_ip.win_public_ip.ip_address
+}
+
 
 ##########################
 # Connectivity Lab Outputs
