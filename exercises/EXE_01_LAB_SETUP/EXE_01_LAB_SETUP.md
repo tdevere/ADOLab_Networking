@@ -44,10 +44,10 @@ This guide automates the deployment of the **Agent** and **Connectivity** enviro
 
 ### Generate SSH Key Pair (If Needed)
 
-If you don’t yet have an SSH key pair at `~/.ssh/terraform_lab_key_rsa` and `~/.ssh/terraform_lab_key.pub`:
+If you don’t yet have an SSH key pair at `~/.ssh/terraform_lab_key` and `~/.ssh/terraform_lab_key.pub`:
 
 ```bash
-ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform lab key RSA"
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key -N "" -C "terraform lab key RSA"
 ````
 
 > **Using RSA instead Ed25519?**
@@ -97,7 +97,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform la
 1.  Create a plan (we’ll override `admin_ssh_key` at plan time):
 
     ```bash
-    terraform plan -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key.pub)" -out=tfplan
+    terraform plan -var="admin_password=<provide_your_windows_admin_password>" -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key.pub)" -out=tfplan
     ```
 
 2.  Apply the plan:
@@ -108,7 +108,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform la
 
 3.  **Verify**:
 
-      * Outputs for `agent_vm_public_ip`, `key_vault_private_ip`, `private_dns_zone_name`, and **`windows_admin_password`** appear.
+      * Outputs for `agent_vm_public_ip`,`windows_vm_public_ip`, `key_vault_private_ip`, `private_dns_zone_name`, and **`windows_admin_password`** appear.
 
 > **Why pass via `-var`?**
 >
@@ -132,7 +132,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform la
 * If it’s blank, run:
 
   ```bash
-  terraform refresh -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key.pub)"
+  terraform refresh -var="admin_password=<provide_your_windows_admin_password>" -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key.pub)"
   ```
 
   then retry:
@@ -144,7 +144,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform la
 2. **SSH to the Linux agent**
 
    ```bash
-   ssh -i ~/.ssh/terraform_lab_key_rsa azureuser@$(terraform output -raw agent_vm_public_ip)
+   ssh -i ~/.ssh/terraform_lab_key azureuser@$(terraform output -raw agent_vm_public_ip)
    ```
 
    *Verify*: You land at a shell prompt without entering a password.
@@ -178,7 +178,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key_rsa -N "" -C "terraform la
 > Do Not Perform this operation, unless this is the end of your exercises. But failure to remove these resources will impact your Azure budget.
 
 ```bash
-terraform destroy -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key.pub)" -auto-approve
+terraform destroy -var="admin_password=<provide_your_windows_admin_password>" -var="admin_ssh_key=$(cat ~/.ssh/terraform_lab_key.pub)" -auto-approve
 rm -f terraform.tfstate* terraform.tfstate.backup
 ```
 
