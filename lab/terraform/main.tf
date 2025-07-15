@@ -107,8 +107,6 @@ resource "azurerm_linux_virtual_machine" "agent_vm" {
     version   = "latest"
   }
   
-custom_data = "IyEvYmluL2Jhc2gKZXhlYyA+IC92YXIvbG9nL2N1c3RvbWRhdGEubG9nIDI+JjEKc2V0IC14CgphcHQtZ2V0IHVwZGF0ZQphcHQtZ2V0IGluc3RhbGwgLXkgeHJkcCB4ZmNlNCB4ZmNlNC1nb29kaWVzCgpta2RpciAtcCAvaG9tZS9henVyZXVzZXIKZWNobyB4ZmNlNC1zZXNzaW9uID4gL2hvbWUvYXp1cmV1c2VyLy54c2Vzc2lvbgpjaG93biBhenVyZXVzZXI6YXp1cmV1c2VyIC9ob21lL2F6dXJldXNlci8ueHNlc3Npb24KCnN5c3RlbWN0bCBlbmFibGUgeHJkcApzeXN0ZW1jdGwgc3RhcnQgeHJkcAp1ZncgYWxsb3cgMzM4OQo="
-
 }
 
 ###############################################################################
