@@ -1,0 +1,26 @@
+# === Agent Lab ===
+agent_rg_name               = "tf-agent-lab-rg"
+agent_location              = "westus2"
+agent_vnet_name             = "agent-vnet"
+agent_vnet_address_space    = ["10.0.0.0/16"]
+agent_subnet_name           = "agent-subnet"
+agent_subnet_prefix         = "10.0.1.0/24"
+public_ip_name              = "agent-vm-pip"
+nic_name                    = "agent-vm-nic"
+vm_name                     = "agent-vm"
+vm_size                     = "Standard_B1ms"
+admin_username              = "azureuser"
+admin_ssh_key               = ""
+admin_password              = ""
+
+# === Connectivity Lab ===
+connect_rg_name             = "tf-connect-lab-rg"
+connect_location            = "westus2"
+connect_vnet_name           = "connect-vnet"
+connect_vnet_address_space  = ["10.1.0.0/16"]
+connect_agents_subnet_name  = "connect-agents-subnet"
+connect_agents_subnet_prefix= "10.1.1.0/24"
+connect_pe_subnet_name      = "connect-pe-subnet"
+connect_pe_subnet_prefix    = "10.1.2.0/24"
+key_vault_name              = "lab-kv-1234"
+wrong_kv_ip                 = "10.1.2.50"
