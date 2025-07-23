@@ -50,8 +50,8 @@ In this lab you’ll connect to the Linux and Windows VMs you deployed, install 
 
 1. **Get the VM public IPs**  
    ```bash
-   LINUX_IP=$(terraform output -raw agent_vm_public_ip)
-   WINDOWS_IP=$(terraform output -raw windows_vm_public_ip)
+   $LINUX_IP=$(terraform output -raw agent_vm_public_ip)
+   $WINDOWS_IP=$(terraform output -raw windows_vm_public_ip)
 ```
 
 2. **SSH into Linux**
