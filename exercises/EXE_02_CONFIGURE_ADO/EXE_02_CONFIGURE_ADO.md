@@ -92,8 +92,8 @@ On **both** VMs you will:
 
 1. Sign in to your Azure DevOps organization.
 2. Go to **Organization Settings → Agent Pools**.
-3. Click **New pool**.
-
+3. Click **Add pool**.
+   * Select **Pool type**: `Self-hosted`
    * **Name**: `SelfHostedLabPool`
    * **Type**: Self‑hosted
 4. Click **Create**.
@@ -106,8 +106,8 @@ On **both** VMs you will:
 
    ```bash
    mkdir ~/azagent && cd ~/azagent
-   curl -O https://vstsagentpackage.azureedge.net/agent/2.*.*/vsts-agent-linux-x64-2.*.*.tar.gz
-   tar zxvf vsts-agent-linux-x64-*.tar.gz
+   curl -O https://download.agent.dev.azure.com/agent/2.*.*/vsts-agent-linux-x64-2.*.*.tar.gz (Current Agent Package Version: https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-linux-x64-4.258.1.tar.gz)
+   tar zxvf vsts-agent-linux-x64-*.tar.gz (tar zxvf vsts-agent-linux-x64-4.258.1.tar.gz)
    sudo apt-get update && sudo apt-get install -y libssl1.1 libicu66
 
    ./config.sh --unattended \
@@ -130,8 +130,9 @@ On **both** VMs you will:
 
    ```powershell
    md C:\azagent; cd C:\azagent
-   Invoke-WebRequest -Uri https://vstsagentpackage.azureedge.net/agent/2.*.*/vsts-agent-win-x64-2.*.*.zip -OutFile agent.zip
-   Expand-Archive .\agent.zip -DestinationPath .
+   Invoke-WebRequest -Uri https://download.agent.dev.azure.com/agent/2.*.*/vsts-agent-win-x64-2.*.*.zip -OutFile agent.zip 
+   (Current Agent Package Version: https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-win-x64-4.258.1.zip)
+   Expand-Archive .\vsts-agent-win-x64-4.258.1.zip -DestinationPath .
 
    .\config.cmd --unattended `
      --url https://dev.azure.com/yourorg `
