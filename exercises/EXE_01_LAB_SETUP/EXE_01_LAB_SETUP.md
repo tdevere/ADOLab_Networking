@@ -10,6 +10,8 @@
 4. [Generate SSH Key Pair (If Needed)](#generate-ssh-key-pair-if-needed)
 5. [Lab Setup](#lab-setup)
 6. [Exercises](#exercises)
+    1. [Exercise 1: Deploy environments with Terraform](#exercise-1-deploy-environments-with-Terraform)
+    2. [Exercise 2: Validate agent VM access](#exercise-2-validate-agent-VM-access)
 7. [Submission & Verification](#submission--verification)
 8. [Cleanup](#cleanup)
 9. [Further Reading](#further-reading)
