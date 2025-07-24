@@ -31,43 +31,72 @@ This guide automates the deployment of the **Agent** and **Connectivity** enviro
 
 ---
 
+
 ## Prerequisites
 
 - Completed the Azure DevOps Agent & Connectivity Lab
 - Azure subscription with **Contributor** role
 - Terraform CLI $\ge$ 1.4.0 installed
 - Azure CLI or PowerShell Az modules
-- **Local SSH key pair for agent VM access:**
-    - Private key at `~/.ssh/terraform_lab_key`
-    - Public key at `~/.ssh/terraform_lab_key.pub`
-    *(If you don't have one, follow the instructions in "Generate SSH Key Pair (If Needed)" below before proceeding with Lab Setup.)*
 
 ---
 
-### Generate SSH Key Pair (If Needed)
-
-If you don’t yet have an SSH key pair at `~/.ssh/terraform_lab_key` and `~/.ssh/terraform_lab_key.pub`:
-
-```bash
-ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key -N "" -C "terraform lab key RSA"
-````
-
-> **Using RSA instead Ed25519?**
->
->   * Only RSA SSH keys are supported by Azure
-
------
-
 ## Lab Setup
 
-1.  **Clone the repo**
+### 1. Prepare Your Lab Directory
 
-    ```bash
-    git clone [https://github.com/YourOrg/terraform-network-lab.git](https://github.com/YourOrg/terraform-network-lab.git)
-    cd terraform-network-lab/terraform
-    ```
+Create a dedicated directory off your root drive (e.g. `C:\ADOLab_Networking`) to store all lab files and cloned content:
 
-2.  **Populate your variables**
+```powershell
+New-Item -ItemType Directory -Path C:\ADOLab_Networking
+```
+
+### 2. Generate SSH Key Pair (Precondition)
+
+You must have a local SSH key pair for agent VM access:
+- Private key at `~/.ssh/terraform_lab_key`
+- Public key at `~/.ssh/terraform_lab_key.pub`
+
+
+If you don’t yet have an SSH key pair at these locations, generate one. Use the following command in your preferred shell:
+
+
+
+
+
+**For PowerShell (Windows):**
+```powershell
+ssh-keygen -t rsa -b 4096 -f $env:USERPROFILE\.ssh\terraform_lab_key
+```
+
+> If you see a message like `already exists`, you already have a key at that location. You can:
+> - Press `y` to overwrite (this will replace your existing key—only do this if you do not need the old key).
+> - Press `n` to cancel and use your existing key.
+> - Or specify a different filename if you want to keep both keys.
+
+> **Important:** Save your SSH key passphrase somewhere secure—you will need it later in the lab to access your VMs.
+
+**For WSL or Git Bash:**
+```bash
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key -N ""
+```
+
+> **Note:** Only RSA SSH keys are supported by Azure (not Ed25519).
+
+---
+
+### 3. Clone the Repo Into Your Lab Directory
+
+
+Copy the repository into your new lab directory:
+
+```powershell
+git clone https://github.com/tdevere/ADOLab_Networking.git
+cd C:\ADOLab_Networking\lab\terraform
+```
+
+
+4.  **Populate your variables**
 
     ```bash
     cp terraform.tfvars.example terraform.tfvars
@@ -75,22 +104,22 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/terraform_lab_key -N "" -C "terraform lab ke
     # The Windows admin password will be automatically generated and outputted by Terraform.
     ```
 
-3.  **Authenticate to Azure**
+
+5.  **Authenticate to Azure**
 
     ```bash
-    az login
+    az login #Subscription Id obtained here
     az account set --subscription "<YourSubscriptionID>"
     ```
 
-4.  **Initialize Terraform**
+
+6.  **Initialize Terraform**
 
     ```bash
     terraform init
     ```
 
 -----
-
-## Exercises
 
 ### Exercise 1: Deploy environments with Terraform
 
@@ -184,7 +213,30 @@ terraform destroy -var="admin_password=<provide_your_windows_admin_password>" -v
 rm -f terraform.tfstate* terraform.tfstate.backup
 ```
 
+## Troubleshooting: Key Vault Name Already Exists
 
+If you encounter an error like:
+
+```
+Error: creating Key Vault ... Code="VaultAlreadyExists" Message="The vault name 'lab-kv-1234' is already in use. Vault names are globally unique ..."
+```
+
+**Resolution:**
+
+- Azure Key Vault names must be globally unique across all Azure subscriptions and regions.
+- If the name is already taken, update your Key Vault name in your Terraform variables (e.g., add a random suffix or use a unique identifier).
+- If you recently deleted a Key Vault with this name, it may be in a recoverable (soft deleted) state. You must purge it before reusing the name:
+
+  1. Find the deleted vault:
+     ```bash
+     az keyvault list-deleted --location <region>
+     ```
+  2. Purge the deleted vault:
+     ```bash
+     az keyvault purge --name <your-vault-name>
+     ```
+
+See official docs for more: [Azure Key Vault soft-delete and purge](https://go.microsoft.com/fwlink/?linkid=2147740)
 
 ## Further Reading
 

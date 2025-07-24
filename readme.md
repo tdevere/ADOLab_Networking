@@ -69,6 +69,44 @@ flowchart LR
    Open any of the numbered folders under `exercises/` and follow the `README.md` there.
    Or get started with the [EXE\_01\_LAB\_SETUP](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md)
 
+
+## Lab Index & Exercises
+
+### 1. Initial Setup Lab
+- **File:** `exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md`
+- **Exercises:**
+  1. Deploy environments with Terraform
+  2. Validate agent VM access (SSH for Linux, RDP for Windows)
+  3. Submission & Verification
+  4. Cleanup
+
+### 2. Azure DevOps Agent Registration Lab
+- **File:** `exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md`
+- **Exercises:**
+  1. Create an Agent Pool in Azure DevOps
+  2. Register the Linux Agent
+  3. Register the Windows Agent
+  4. Create an ARM Service Connection to Key Vault
+  5. Submission & Verification
+  6. Cleanup
+
+---
+
+## Quick Reference: All Lab Exercises
+
+| Lab Name                              | Exercise Description                                 | Exercise Name & Link |
+|---------------------------------------|-----------------------------------------------------|----------------------|
+| Initial Setup Lab                     | Deploy environments with Terraform                  | [Exercise 1: Deploy environments with Terraform](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#exercise-1-deploy-environments-with-terraform) |
+|                                       | Validate agent VM access (SSH/RDP)                  | [Exercise 2: Validate agent VM access](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#exercise-2-validate-agent-vm-access) |
+|                                       | Submission & Verification                           | [Submission & Verification](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#submission--verification) |
+|                                       | Cleanup                                             | [Cleanup](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#cleanup) |
+| Azure DevOps Agent Registration Lab    | Create an Agent Pool in Azure DevOps                | [Exercise 1: Create an Agent Pool](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-1-create-an-agent-pool) |
+|                                       | Register the Linux Agent                            | [Exercise 2: Register the Linux Agent](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-2-register-the-linux-agent) |
+|                                       | Register the Windows Agent                          | [Exercise 3: Register the Windows Agent](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-3-register-the-windows-agent) |
+|                                       | Create an ARM Service Connection to Key Vault       | [Exercise 4: Create an ARM Service Connection to Key Vault](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-4-create-an-arm-service-connection-to-key-vault) |
+|                                       | Submission & Verification                           | [Submission & Verification](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#submission--verification) |
+|                                       | Cleanup                                             | [Cleanup](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#cleanup) |
+
 ## Contributing
 
 * **Found a bug or have an idea?**
