@@ -132,7 +132,7 @@ On **both** VMs you will:
    md C:\azagent; cd C:\azagent
    Invoke-WebRequest -Uri https://download.agent.dev.azure.com/agent/2.*.*/vsts-agent-win-x64-2.*.*.zip -OutFile agent.zip 
    (Current Agent Package Version: https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-win-x64-4.258.1.zip)
-   Expand-Archive .\vsts-agent-win-x64-4.258.1.zip -DestinationPath .
+   Expand-Archive .\agent.zip -DestinationPath .
 
    .\config.cmd --unattended `
      --url https://dev.azure.com/yourorg `
