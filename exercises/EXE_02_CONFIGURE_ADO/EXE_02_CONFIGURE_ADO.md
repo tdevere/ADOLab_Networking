@@ -163,7 +163,6 @@ Before registering your agents, you need a Personal Access Token (PAT) with the 
    Invoke-WebRequest -Uri https://download.agent.dev.azure.com/agent/2.*.*/vsts-agent-win-x64-2.*.*.zip -OutFile agent.zip 
    
    (Current Agent Package Version: https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-win-x64-4.258.1.zip)
-   
    Expand-Archive .\agent.zip -DestinationPath .
 
    .\config.cmd --unattended `
