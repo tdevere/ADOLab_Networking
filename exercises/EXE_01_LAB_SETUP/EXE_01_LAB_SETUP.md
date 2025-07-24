@@ -172,18 +172,25 @@ cd C:\ADOLab_Networking\lab\terraform
   terraform output -raw agent_vm_public_ip
   ```
 
+
 2. **SSH to the Linux agent**
 
    ```bash
    ssh -i ~/.ssh/terraform_lab_key azureuser@$(terraform output -raw agent_vm_public_ip)
    ```
 
+   > On first connection, you may see a prompt like:
+   >
+   >   `The authenticity of host '52.x.y.z (52.x.y.z)' can't be established. ... Are you sure you want to continue connecting (yes/no/[fingerprint])?`
+   >
+   > Type `yes` to add the VM to your `known_hosts` file. This is expected for new VMs.
+
    *Verify*: You land at a shell prompt without entering a password.
 
 3. **RDP to the Windows agent**
 
    ```powershell
-   mstsc /v:$(terraform output -raw agent_vm_public_ip)
+   mstsc /v:$(terraform output -raw windows_vm_public_ip)
    ```
 
    * Username: `azureuser` (or your `admin_username`)
