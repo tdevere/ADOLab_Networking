@@ -171,6 +171,7 @@ Before registering your agents, you need a Personal Access Token (PAT) with the 
      --pool SelfHostedLabPool `
      --agent windows-agent-01 `
      --runAsService `
+     --runAsAutoLogon `
      --windowsLogonAccount "NT AUTHORITY\NetworkService" `
      --acceptTeeEula
    ```
