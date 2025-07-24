@@ -69,31 +69,6 @@ flowchart LR
    Open any of the numbered folders under `exercises/` and follow the `README.md` there.
    Or get started with the [EXE\_01\_LAB\_SETUP](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md)
 
-
-## Lab Index & Exercises
-
-### 1. Initial Setup Lab
-- **File:** `exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md`
-- **Exercises:**
-  1. Deploy environments with Terraform
-  2. Validate agent VM access (SSH for Linux, RDP for Windows)
-  3. Submission & Verification
-  4. Cleanup
-
-
-### 2. Azure DevOps Agent Registration Lab
-- **File:** `exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md`
-- **Exercises:**
-  1. Generate a Personal Access Token (PAT)
-  2. Create an Agent Pool in Azure DevOps
-  3. Register the Linux Agent
-  4. Register the Windows Agent
-  5. Create an ARM Service Connection to Key Vault
-  6. Submission & Verification
-  7. Cleanup
-
----
-
 ## Quick Reference: All Lab Exercises
 
 | Lab Name                              | Exercise Description                                 | Exercise Name & Link |
