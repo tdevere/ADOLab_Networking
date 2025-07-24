@@ -171,7 +171,7 @@ Before registering your agents, you need a Personal Access Token (PAT) with the 
      --pool SelfHostedLabPool `
      --agent windows-agent-01 `
      --runAsService `
-	  --windowsLogonAccount "NT AUTHORITY\NetworkService" `
+     --windowsLogonAccount "NT AUTHORITY\NetworkService" `
      --acceptTeeEula
    ```
 
@@ -183,6 +183,9 @@ Before registering your agents, you need a Personal Access Token (PAT) with the 
 ### Exercise 5: Create an ARM Service Connection to Key Vault
 
 1. In Azure DevOps, navigate to your **Project Settings → Service connections**.
+
+> **Note:** You must have an Azure DevOps project created before you can add service connections. If you do not have a project yet, follow the official guide: [Create a project in Azure DevOps](https://learn.microsoft.com/en-us/azure/devops/organizations/projects/create-project?view=azure-devops)
+
 2. Click **New service connection** and choose **Azure Resource Manager → Service principal (automatic)**.
 3. On the setup form:
 
@@ -192,7 +195,7 @@ Before registering your agents, you need a Personal Access Token (PAT) with the 
    * **Service connection name**: `LabKeyVaultConnection`
    * **Grant access permission to all pipelines**: checked
 4. Click **Save**.
-5. **Verify** the connection by editing a pipeline and selecting **LabKeyVaultConnection** as the service connection for a Key Vault task.
+
 
 ---
 
