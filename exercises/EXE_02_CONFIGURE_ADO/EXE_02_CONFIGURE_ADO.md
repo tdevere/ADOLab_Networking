@@ -10,10 +10,11 @@
 4. [Connect to Your VMs](#connect-to-your-vms)  
 5. [Install & Configure the Azure DevOps Agent](#install--configure-the-azure-devops-agent)  
 6. [Exercises](#exercises)  
-   1. [Exercise 1: Create an Agent Pool](#exercise-1-create-an-agent-pool)  
-   2. [Exercise 2: Register the Linux Agent](#exercise-2-register-the-linux-agent)  
-   3. [Exercise 3: Register the Windows Agent](#exercise-3-register-the-windows-agent)  
-   4. [Exercise 4: Create an ARM Service Connection to Key Vault](#exercise-4-create-an-arm-service-connection-to-key-vault)  
+   1. [Exercise 1: Generate a Personal Access Token (PAT)](#exercise-1-generate-a-personal-access-token-pat)  
+   2. [Exercise 2: Create an Agent Pool](#exercise-2-create-an-agent-pool)  
+   3. [Exercise 3: Register the Linux Agent](#exercise-3-register-the-linux-agent)  
+   4. [Exercise 4: Register the Windows Agent](#exercise-4-register-the-windows-agent)  
+   5. [Exercise 5: Create an ARM Service Connection to Key Vault](#exercise-5-create-an-arm-service-connection-to-key-vault)  
 7. [Submission & Verification](#submission--verification)  
 8. [Cleanup](#cleanup)  
 9. [Further Reading](#further-reading)  
@@ -52,7 +53,7 @@ In this lab you’ll connect to the Linux and Windows VMs you deployed, install 
    ```bash
    $LINUX_IP=$(terraform output -raw agent_vm_public_ip)
    $WINDOWS_IP=$(terraform output -raw windows_vm_public_ip)
-```
+   ```
 
 2. **SSH into Linux**
 
@@ -86,9 +87,31 @@ On **both** VMs you will:
 
 ---
 
+
 ## Exercises
 
-### Exercise 1: Create an Agent Pool
+
+### Exercise 1: Generate a Personal Access Token (PAT)
+
+Before registering your agents, you need a Personal Access Token (PAT) with the correct permissions:
+
+1. Sign in to your Azure DevOps organization (e.g. https://dev.azure.com/yourorg).
+2. Click your user icon (top right) and select **Security**.
+3. Under **Personal Access Tokens**, click **New Token**.
+4. Fill out the form:
+   - **Name:** e.g. `LabAgentPAT`
+   - **Organization:** your Azure DevOps org
+   - **Scopes:**
+     - **Agent Pools**: Read & manage
+     - **Service Connections**: Read & manage
+     - (Optional) **Project & Pipeline**: Read if you want to test pipeline integration
+   - **Expiration:** Choose a suitable duration (e.g. 30 days)
+5. Click **Create** and copy the PAT value. **Save it securely—you will need it to register your agents.**
+
+---
+
+
+### Exercise 2: Create an Agent Pool
 
 1. Sign in to your Azure DevOps organization.
 2. Go to **Organization Settings → Agent Pools**.
@@ -100,14 +123,18 @@ On **both** VMs you will:
 
 ---
 
-### Exercise 2: Register the Linux Agent
+
+### Exercise 3: Register the Linux Agent
 
 1. **On your Linux VM** (SSH session), run:
 
    ```bash
    mkdir ~/azagent && cd ~/azagent
-   curl -O https://download.agent.dev.azure.com/agent/2.*.*/vsts-agent-linux-x64-2.*.*.tar.gz (Current Agent Package Version: https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-linux-x64-4.258.1.tar.gz)
-   tar zxvf vsts-agent-linux-x64-*.tar.gz (tar zxvf vsts-agent-linux-x64-4.258.1.tar.gz)
+
+   curl -O https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-linux-x64-4.258.1.tar.gz
+   
+   tar zxvf vsts-agent-linux-x64-*.tar.gz 
+   
    sudo apt-get update && sudo apt-get install -y libssl1.1 libicu66
 
    ./config.sh --unattended \
@@ -118,37 +145,43 @@ On **both** VMs you will:
      --acceptTeeEula
 
    sudo ./svc.sh install
+
    sudo ./svc.sh start
    ```
 2. **Verify** in Azure DevOps under **Agent Pools → SelfHostedLabPool** that **linux-agent-01** is online.
 
 ---
 
-### Exercise 3: Register the Windows Agent
+
+### Exercise 4: Register the Windows Agent
 
 1. **On your Windows VM** (RDP session), open PowerShell as Administrator and run:
 
    ```powershell
    md C:\azagent; cd C:\azagent
+   
    Invoke-WebRequest -Uri https://download.agent.dev.azure.com/agent/2.*.*/vsts-agent-win-x64-2.*.*.zip -OutFile agent.zip 
+   
    (Current Agent Package Version: https://download.agent.dev.azure.com/agent/4.258.1/vsts-agent-win-x64-4.258.1.zip)
-   Expand-Archive .\vsts-agent-win-x64-4.258.1.zip -DestinationPath .
+   
+   Expand-Archive .\agent.zip -DestinationPath .
 
    .\config.cmd --unattended `
      --url https://dev.azure.com/yourorg `
      --auth pat --token YOUR_PAT `
      --pool SelfHostedLabPool `
      --agent windows-agent-01 `
+     --runAsService `
+	  --windowsLogonAccount "NT AUTHORITY\NetworkService" `
      --acceptTeeEula
-
-   .\svc.sh install
-   .\svc.sh start
    ```
+
 2. **Verify** that **windows-agent-01** appears online in **SelfHostedLabPool**.
 
 ---
 
-### Exercise 4: Create an ARM Service Connection to Key Vault
+
+### Exercise 5: Create an ARM Service Connection to Key Vault
 
 1. In Azure DevOps, navigate to your **Project Settings → Service connections**.
 2. Click **New service connection** and choose **Azure Resource Manager → Service principal (automatic)**.

@@ -80,15 +80,17 @@ flowchart LR
   3. Submission & Verification
   4. Cleanup
 
+
 ### 2. Azure DevOps Agent Registration Lab
 - **File:** `exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md`
 - **Exercises:**
-  1. Create an Agent Pool in Azure DevOps
-  2. Register the Linux Agent
-  3. Register the Windows Agent
-  4. Create an ARM Service Connection to Key Vault
-  5. Submission & Verification
-  6. Cleanup
+  1. Generate a Personal Access Token (PAT)
+  2. Create an Agent Pool in Azure DevOps
+  3. Register the Linux Agent
+  4. Register the Windows Agent
+  5. Create an ARM Service Connection to Key Vault
+  6. Submission & Verification
+  7. Cleanup
 
 ---
 
@@ -100,10 +102,11 @@ flowchart LR
 |                                       | Validate agent VM access (SSH/RDP)                  | [Exercise 2: Validate agent VM access](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#exercise-2-validate-agent-vm-access) |
 |                                       | Submission & Verification                           | [Submission & Verification](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#submission--verification) |
 |                                       | Cleanup                                             | [Cleanup](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#cleanup) |
-| Azure DevOps Agent Registration Lab    | Create an Agent Pool in Azure DevOps                | [Exercise 1: Create an Agent Pool](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-1-create-an-agent-pool) |
-|                                       | Register the Linux Agent                            | [Exercise 2: Register the Linux Agent](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-2-register-the-linux-agent) |
-|                                       | Register the Windows Agent                          | [Exercise 3: Register the Windows Agent](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-3-register-the-windows-agent) |
-|                                       | Create an ARM Service Connection to Key Vault       | [Exercise 4: Create an ARM Service Connection to Key Vault](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-4-create-an-arm-service-connection-to-key-vault) |
+| Azure DevOps Agent Registration Lab    | Generate a Personal Access Token (PAT)              | [Exercise 1: Generate a Personal Access Token (PAT)](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-1-generate-a-personal-access-token-pat) |
+|                                       | Create an Agent Pool in Azure DevOps                | [Exercise 2: Create an Agent Pool](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-2-create-an-agent-pool) |
+|                                       | Register the Linux Agent                            | [Exercise 3: Register the Linux Agent](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-3-register-the-linux-agent) |
+|                                       | Register the Windows Agent                          | [Exercise 4: Register the Windows Agent](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-4-register-the-windows-agent) |
+|                                       | Create an ARM Service Connection to Key Vault       | [Exercise 5: Create an ARM Service Connection to Key Vault](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-5-create-an-arm-service-connection-to-key-vault) |
 |                                       | Submission & Verification                           | [Submission & Verification](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#submission--verification) |
 |                                       | Cleanup                                             | [Cleanup](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#cleanup) |
 
