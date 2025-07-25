@@ -2,50 +2,6 @@
 
 ## Scenario
 
-You are a DevOps support engineer. The Linux build agent is unreachable due to a missing public IP. Your job is to troubleshoot and resolve the connectivity issue using Azure tools (Portal or CLI). **Do not use Terraform to fix the problem.**
-
----
-
-## How to Run This Scenario
-
-1. **Navigate to the base lab folder:**
-   ```powershell
-   cd ../ExampleLab
-   ```
-2. **Initialize Terraform:**
-   ```powershell
-   terraform init
-   ```
-3. **Plan and apply with scenario variables:**
-   ```powershell
-   $sshkey = Get-Content $env:USERPROFILE\.ssh\terraform_lab_key.pub
-   terraform plan -var-file="../Linux_Connectivity_Issue_01/scenario.tfvars" -var="admin_ssh_key=$sshkey" -out=tfplan
-   terraform apply tfplan
-   ```
-
-This will provision the environment with the public IP for the Linux agent disabled, simulating the connectivity issue.
-
----
-
-## Troubleshooting Tasks
-
-1. Attempt to SSH to the agent using the public IP (should fail).
-2. Check the VM's networking configuration in the Azure Portal.
-3. Use Azure CLI or Portal to verify if the public IP is attached and enabled.
-4. Re-enable or re-attach the public IP using Azure Portal or CLI.
-5. Confirm the agent is reachable via SSH and appears online in the DevOps agent pool.
-6. Document your troubleshooting steps and resolution.
-
----
-
-## Notes
-- Do not use Terraform to fix the issue. The lab simulates a real-world operational scenario.
-- If you need to roll back, contact your instructor or use provided rollback instructions.
-
-# Lab: Linux Connectivity Issue 01
-
-## Scenario
-
 You are a DevOps support engineer. A build pipeline is failing because the Linux build agent is unreachable. The environment was provisioned for you—your job is to troubleshoot and resolve the connectivity issue using Azure tools (Portal or CLI). **Do not use Terraform to fix the problem.**
 
 ---
@@ -72,6 +28,34 @@ Follow these steps to set up your lab environment:
 4. **Obtain the Linux agent VM details:**
    - Use the Azure Portal or CLI to find the VM and its networking configuration.
 
+### Required Variables
+The following variables must be supplied via `terraform.tfvars` or the `-var` option:
+
+- `location`
+- `agent_rg_name`
+- `agent_location`
+- `agent_vnet_name`
+- `agent_vnet_address_space`
+- `agent_subnet_name`
+- `agent_subnet_prefix`
+- `public_ip_name`
+- `nic_name`
+- `vm_name`
+- `vm_size`
+- `admin_username`
+- `admin_password`
+- `admin_ssh_key`
+- `connect_rg_name`
+- `connect_location`
+- `connect_vnet_name`
+- `connect_vnet_address_space`
+- `connect_agents_subnet_name`
+- `connect_agents_subnet_prefix`
+- `connect_pe_subnet_name`
+- `connect_pe_subnet_prefix`
+- `key_vault_name`
+- `wrong_kv_ip`
+
 ---
 
 ## Symptoms
@@ -80,6 +64,15 @@ Follow these steps to set up your lab environment:
   > Agent unreachable: SSH connection timed out
 - You cannot SSH to the Linux agent using its public IP.
 - The agent does not appear online in the Azure DevOps agent pool.
+
+## Troubleshooting Tasks
+
+1. Attempt to SSH to the agent using the public IP (should fail).
+2. Check the VM's networking configuration in the Azure Portal.
+3. Use Azure CLI or Portal to verify if the public IP is attached and enabled.
+4. Re-enable or re-attach the public IP using Azure Portal or CLI.
+5. Confirm the agent is reachable via SSH and appears online in the DevOps agent pool.
+6. Document your troubleshooting steps and resolution.
 
 ---
 
@@ -123,3 +116,7 @@ Follow these steps to set up your lab environment:
 
 ## Resources
 - [Azure CLI Reference](https://learn.microsoft.com/en-us/cli/azure/)
+
+## Notes
+- Do not use Terraform to fix the issue. The lab simulates a real-world operational scenario.
+- If you need to roll back, contact your instructor or use provided rollback instructions.
