@@ -33,6 +33,7 @@
 |-------------:|---------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
 | 08           | [Retrieve a Key Vault Secret](./EXE_09_KEYVAULT_SECRET/EXE_09_KEYVAULT_SECRET.md)            | From the Linux agent, use the Azure CLI to fetch a secret from the lab’s Key Vault       |
 | 09           | [Validate Private Endpoint DNS](./EXE_10_DNS_CORRECT/EXE_10_DNS_CORRECT.md)                  | Resolve the Key Vault FQDN in the Private DNS zone and connect successfully             |
+| 10           | [Private Endpoint Test](./private_endpoint_test_lab/private_endpoint_test_lab.md)           | Query Key Vault through its private endpoint from the agent VM                          |
 
 ---
 
@@ -40,7 +41,7 @@
 
 | Exercise No. | Name / Path                                                                                   | Description                                                                                         |
 |-------------:|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| 10           | [Inventory Script](./EXE_11_INVENTORY_SCRIPT/EXE_11_INVENTORY_SCRIPT.md)                      | Execute the PowerShell inventory script, then analyze the generated CSV/JSON to validate your setup |
+| 11           | [Inventory Script](./EXE_11_INVENTORY_SCRIPT/EXE_11_INVENTORY_SCRIPT.md)                      | Execute the PowerShell inventory script, then analyze the generated CSV/JSON to validate your setup |
 ---
 
 
