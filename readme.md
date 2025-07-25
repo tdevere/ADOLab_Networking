@@ -40,8 +40,9 @@ flowchart LR
 
 ## Repo Structure
 
-* **exercises/** – Step‑by‑step Markdown exercises to walk through each lab scenario
-* **lab/terraform/** – Terraform code for Agent Lab (VM + NSG) and Connectivity Lab (Key Vault, Private Endpoint, Private DNS)
+* **lab_setup/** – Step‑by‑step Markdown exercises to walk through each lab scenario
+* **labs/base_lab/** – Terraform code for Agent Lab (VM + NSG) and Connectivity Lab (Key Vault, Private Endpoint, Private DNS)
+* **labs/** – Scenario labs that build on top of the base environment
 * **README.md** – (You are here)
 
 ## Getting Started
@@ -58,7 +59,7 @@ flowchart LR
    > **Edit `terraform.tfvars`** with your specific settings (SSH key, subscription, etc.)
 
    ```bash
-   cd lab/terraform
+   cd labs/base_lab
    cp terraform.tfvars.example terraform.tfvars  # see note above
    terraform init
    terraform plan
@@ -66,24 +67,32 @@ flowchart LR
    ```
 
 3. **Run Exercises**
-   Open any of the numbered folders under `exercises/` and follow the `README.md` there.
-   Or get started with the [EXE\_01\_LAB\_SETUP](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md)
+   Open any of the numbered folders under `lab_setup/` and follow the `README.md` there.
+   Or get started with the [EXE\_01\_LAB\_SETUP](lab_setup/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md)
 
 ## Quick Reference: All Lab Exercises
 
 | Lab Name                              | Exercise Description                                 | Exercise Name & Link |
 |---------------------------------------|-----------------------------------------------------|----------------------|
-| Initial Setup Lab                     | Deploy environments with Terraform                  | [Exercise 1: Deploy environments with Terraform](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#exercise-1-deploy-environments-with-terraform) |
-|                                       | Validate agent VM access (SSH/RDP)                  | [Exercise 2: Validate agent VM access](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#exercise-2-validate-agent-vm-access) |
-|                                       | Submission & Verification                           | [Submission & Verification](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#submission--verification) |
-|                                       | Cleanup                                             | [Cleanup](exercises/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#cleanup) |
-| Azure DevOps Agent Registration Lab    | Generate a Personal Access Token (PAT)              | [Exercise 1: Generate a Personal Access Token (PAT)](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-1-generate-a-personal-access-token-pat) |
-|                                       | Create an Agent Pool in Azure DevOps                | [Exercise 2: Create an Agent Pool](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-2-create-an-agent-pool) |
-|                                       | Register the Linux Agent                            | [Exercise 3: Register the Linux Agent](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-3-register-the-linux-agent) |
-|                                       | Register the Windows Agent                          | [Exercise 4: Register the Windows Agent](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-4-register-the-windows-agent) |
-|                                       | Create an ARM Service Connection to Key Vault       | [Exercise 5: Create an ARM Service Connection to Key Vault](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-5-create-an-arm-service-connection-to-key-vault) |
-|                                       | Submission & Verification                           | [Submission & Verification](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#submission--verification) |
-|                                       | Cleanup                                             | [Cleanup](exercises/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#cleanup) |
+| Initial Setup Lab                     | Deploy environments with Terraform                  | [Exercise 1: Deploy environments with Terraform](lab_setup/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#exercise-1-deploy-environments-with-terraform) |
+|                                       | Validate agent VM access (SSH/RDP)                  | [Exercise 2: Validate agent VM access](lab_setup/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#exercise-2-validate-agent-vm-access) |
+|                                       | Submission & Verification                           | [Submission & Verification](lab_setup/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#submission--verification) |
+|                                       | Cleanup                                             | [Cleanup](lab_setup/EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md#cleanup) |
+| Azure DevOps Agent Registration Lab    | Generate a Personal Access Token (PAT)              | [Exercise 1: Generate a Personal Access Token (PAT)](lab_setup/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-1-generate-a-personal-access-token-pat) |
+|                                       | Create an Agent Pool in Azure DevOps                | [Exercise 2: Create an Agent Pool](lab_setup/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-2-create-an-agent-pool) |
+|                                       | Register the Linux Agent                            | [Exercise 3: Register the Linux Agent](lab_setup/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-3-register-the-linux-agent) |
+|                                       | Register the Windows Agent                          | [Exercise 4: Register the Windows Agent](lab_setup/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-4-register-the-windows-agent) |
+|                                       | Create an ARM Service Connection to Key Vault       | [Exercise 5: Create an ARM Service Connection to Key Vault](lab_setup/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#exercise-5-create-an-arm-service-connection-to-key-vault) |
+|                                       | Submission & Verification                           | [Submission & Verification](lab_setup/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#submission--verification) |
+|                                       | Cleanup                                             | [Cleanup](lab_setup/EXE_02_CONFIGURE_ADO/EXE_02_CONFIGURE_ADO.md#cleanup) |
+
+## Scenario Labs
+
+- [DNS Failure Lab](labs/lab_dns_failure/dns_failure_lab.md)
+- [NSG Firewall Lab](labs/lab_nsg_firewall/README.md)
+- [Private Endpoint Test Lab](labs/lab_private_endpoint_test/private_endpoint_test_lab.md)
+- [ExampleLab](labs/ExampleLab/README.md)
+
 
 ## Contributing
 
@@ -93,7 +102,7 @@ flowchart LR
 * **Want to contribute a lab exercise?**
 
   1. Fork or branch this repo.
-  2. Make your changes in the appropriate folder (`docs/`, `exercises/`, or `lab/terraform/`).
+  2. Make your changes in the appropriate folder (`docs/`, `lab_setup/`, or `labs/`).
   3. Submit a **Pull Request** with a clear title and description.
 
 * **Style & Formatting**
