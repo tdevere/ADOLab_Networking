@@ -10,4 +10,3 @@
 
 | Exercise No. | Name / Path                                                                                     | Description                                                                                                   |
 |-------------:|-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| 01           | [Lab Setup](./EXE_01_LAB_SETUP/EXE_01_LAB_SETUP.md)                                             | Clone the lab repository, configure `terraform.tfvars`, and deploy both Agent and Connectivity labs            |
