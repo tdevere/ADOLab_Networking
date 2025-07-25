@@ -13,7 +13,7 @@ Follow these steps to set up your lab environment:
 1. **Clone the repository and navigate to the base lab folder:**
    ```powershell
    git clone https://github.com/tdevere/ADOLab_Networking.git
-   cd ADOLab_Networking/labs/ExampleLab
+   cd ADOLab_Networking/labs/base_lab
    ```
 2. **Initialize Terraform:**
    ```powershell
@@ -28,51 +28,26 @@ Follow these steps to set up your lab environment:
 4. **Obtain the Linux agent VM details:**
    - Use the Azure Portal or CLI to find the VM and its networking configuration.
 
-### Required Variables
-The following variables must be supplied via `terraform.tfvars` or the `-var` option:
 
-- `location`
-- `agent_rg_name`
-- `agent_location`
-- `agent_vnet_name`
-- `agent_vnet_address_space`
-- `agent_subnet_name`
-- `agent_subnet_prefix`
-- `public_ip_name`
-- `nic_name`
-- `vm_name`
-- `vm_size`
-- `admin_username`
-- `admin_password`
-- `admin_ssh_key`
-- `connect_rg_name`
-- `connect_location`
-- `connect_vnet_name`
-- `connect_vnet_address_space`
-- `connect_agents_subnet_name`
-- `connect_agents_subnet_prefix`
-- `connect_pe_subnet_name`
-- `connect_pe_subnet_prefix`
-- `key_vault_name`
-- `wrong_kv_ip`
-
----
-
-## Symptoms
+## Example Symptoms (Sample Data)
 
 - Azure DevOps pipeline fails with error:
-  > Agent unreachable: SSH connection timed out
-- You cannot SSH to the Linux agent using its public IP.
-- The agent does not appear online in the Azure DevOps agent pool.
+  > Example error: Agent unreachable: SSH connection timed out
+- You cannot SSH to the Linux agent using its public IP (e.g., 52.160.10.123).
+- The agent does not appear online in the Azure DevOps agent pool (pool: ExamplePool).
 
-## Troubleshooting Tasks
+*Note: These are example symptoms for demonstration purposes only.*
 
-1. Attempt to SSH to the agent using the public IP (should fail).
-2. Check the VM's networking configuration in the Azure Portal.
-3. Use Azure CLI or Portal to verify if the public IP is attached and enabled.
-4. Re-enable or re-attach the public IP using Azure Portal or CLI.
-5. Confirm the agent is reachable via SSH and appears online in the DevOps agent pool.
-6. Document your troubleshooting steps and resolution.
+## Example Tasks (Sample Data)
+
+1. Attempt to SSH to the agent using the public IP (e.g., `52.160.10.123`).
+2. Check the VM's networking configuration in the Azure Portal (VM name: `example-agent-vm`).
+3. Use Azure CLI or Portal to verify if the public IP is attached and enabled (resource group: `example-rg`).
+4. Re-enable or re-attach the public IP using Azure Portal or CLI if needed.
+5. Confirm the agent is reachable via SSH and appears online in the DevOps agent pool (pool: `ExamplePool`).
+6. Document your troubleshooting steps and resolution (screenshots, CLI output, etc.).
+
+*Note: These are example tasks for demonstration purposes only. Replace with your actual lab steps as needed.*
 
 ---
 
@@ -111,6 +86,24 @@ The following variables must be supplied via `terraform.tfvars` or the `-var` op
 
 4. **Document Your Results**
    - List the steps you performed and any outputs or screenshots that validate the lab deployment.
+
+---
+
+## Restoring to the Base Lab Version
+
+After completing this example lab, you can restore your environment to the original base_lab version:
+
+1. Change to the base lab directory:
+   ```powershell
+   cd ../base_lab
+   ```
+2. Re-apply the base lab configuration:
+   ```powershell
+   $sshkey = Get-Content $env:USERPROFILE\.ssh\terraform_lab_key.pub
+   terraform plan -var-file="terraform.tfvars" -var="admin_ssh_key=$sshkey" -out=tfplan
+   terraform apply tfplan
+   ```
+3. This will reset your environment to the base lab state.
 
 ---
 
