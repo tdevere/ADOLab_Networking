@@ -1,3 +1,46 @@
+# Lab: Linux Connectivity Issue 01
+
+## Scenario
+
+You are a DevOps support engineer. The Linux build agent is unreachable due to a missing public IP. Your job is to troubleshoot and resolve the connectivity issue using Azure tools (Portal or CLI). **Do not use Terraform to fix the problem.**
+
+---
+
+## How to Run This Scenario
+
+1. **Navigate to the base lab folder:**
+   ```powershell
+   cd ../base_lab
+   ```
+2. **Initialize Terraform:**
+   ```powershell
+   terraform init
+   ```
+3. **Plan and apply with scenario variables:**
+   ```powershell
+   $sshkey = Get-Content $env:USERPROFILE\.ssh\terraform_lab_key.pub
+   terraform plan -var-file="../Linux_Connectivity_Issue_01/scenario.tfvars" -var="admin_ssh_key=$sshkey" -out=tfplan
+   terraform apply tfplan
+   ```
+
+This will provision the environment with the public IP for the Linux agent disabled, simulating the connectivity issue.
+
+---
+
+## Troubleshooting Tasks
+
+1. Attempt to SSH to the agent using the public IP (should fail).
+2. Check the VM's networking configuration in the Azure Portal.
+3. Use Azure CLI or Portal to verify if the public IP is attached and enabled.
+4. Re-enable or re-attach the public IP using Azure Portal or CLI.
+5. Confirm the agent is reachable via SSH and appears online in the DevOps agent pool.
+6. Document your troubleshooting steps and resolution.
+
+---
+
+## Notes
+- Do not use Terraform to fix the issue. The lab simulates a real-world operational scenario.
+- If you need to roll back, contact your instructor or use provided rollback instructions.
 
 # Lab: Linux Connectivity Issue 01
 
@@ -11,25 +54,22 @@ You are a DevOps support engineer. A build pipeline is failing because the Linux
 
 Follow these steps to set up your lab environment:
 
-1. **Clone the repository and navigate to the lab folder:**
-   ```bash
+1. **Clone the repository and navigate to the base lab folder:**
+   ```powershell
    git clone https://github.com/tdevere/ADOLab_Networking.git
-   cd ADOLab_Networking/lab/Labs/Linux_Connectivity_Issue_01
+   cd ADOLab_Networking/labs/base_lab
    ```
 2. **Initialize Terraform:**
-   ```bash
+   ```powershell
    terraform init
    ```
-3. **Create a workspace for this lab:**
-   ```bash
-   terraform workspace new linux_connectivity_issue_01
+3. **Plan and apply with scenario variables:**
+   ```powershell
+   $sshkey = Get-Content $env:USERPROFILE\.ssh\terraform_lab_key.pub
+   terraform plan -var-file="../Linux_Connectivity_Issue_01/scenario.tfvars" -var="admin_ssh_key=$sshkey" -out=tfplan
+   terraform apply tfplan
    ```
-4. **Apply the lab configuration:**
-   ```bash
-   terraform plan -var-file="../../terraform/terraform.tfvars.example"
-   terraform apply -var-file="../../terraform/terraform.tfvars.example" -auto-approve
-   ```
-5. **Obtain the Linux agent VM details:**
+4. **Obtain the Linux agent VM details:**
    - Use the Azure Portal or CLI to find the VM and its networking configuration.
 
 ---
@@ -65,7 +105,7 @@ Follow these steps to set up your lab environment:
 ### 1. Attempt SSH Connection
 
 ```bash
-ssh -i ~/.ssh/terraform_lab_key azureuser@<linux-agent-public-ip>
+ssh -i ~/.ssh/terraform_lab_key azureuser@$(terraform output -raw agent_vm_public_ip)
 ```
 
 If you receive a timeout or connection refused, proceed to the next step.

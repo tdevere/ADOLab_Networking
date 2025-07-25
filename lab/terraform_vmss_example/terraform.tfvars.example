@@ -1,8 +1,0 @@
-vmss_rg_name     = "vmss-lab-rg"
-vmss_vnet_name   = "vmss-lab-vnet"
-vmss_vnet_address_space = ["10.2.0.0/16"]
-vmss_subnet_name = "vmss-lab-subnet"
-vmss_subnet_prefix = "10.2.1.0/24"
-vmss_name        = "vmss-lab"
-admin_username   = "azureuser"
-admin_password   = "<your-password>"

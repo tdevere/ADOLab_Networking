@@ -76,7 +76,7 @@ resource "azurerm_network_interface" "vm_nic" {
     name                          = "ipconfig1"
     subnet_id                     = azurerm_subnet.agent_subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.vm_public_ip.id
+    public_ip_address_id          = var.lab_scenario == "Linux_Connectivity_Issue_01" ? null : azurerm_public_ip.vm_public_ip[0].id
   }
 }
 

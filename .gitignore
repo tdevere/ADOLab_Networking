@@ -123,3 +123,4 @@ override.tf.json
 terraform.rc
 
 docs/*
+exclude/

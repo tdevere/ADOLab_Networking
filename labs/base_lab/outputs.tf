@@ -24,7 +24,7 @@ output "agent_nsg_id" {
 
 output "agent_vm_public_ip" {
   description = "Public IP address of the agent VM"
-  value       = azurerm_public_ip.vm_public_ip.ip_address
+  value = length(azurerm_public_ip.vm_public_ip) > 0 ? azurerm_public_ip.vm_public_ip[0].ip_address : null
 }
 
 output "windows_admin_password" {
