@@ -69,7 +69,7 @@ You’ll supply inputs via `.tfvars`, inspect outputs for verification (SSH, DNS
     ├── CSV/
     ├── JSON/
     └── Logs/
-````
+```
 
 ---
 
