@@ -23,7 +23,7 @@
 |-------------:|-----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | 05           | [Private Endpoint Access Denied](./EXE_06_PRIVATE_ENDPOINT_BLOCK/EXE_06_PRIVATE_ENDPOINT_BLOCK.md)   | Attempt to fetch a secret from Key Vault when the private endpoint configuration blocks access               |
 | 06           | [DNS Misresolution Simulation](./EXE_07_DNS_MISRESOLUTION/EXE_07_DNS_MISRESOLUTION.md)               | Use the misconfigured DNS A-record and observe pipeline failure due to wrong DNS resolution                   |
-| 07           | [NSG Firewall Simulation](./EXE_08_NSG_TEST/EXE_08_NSG_TEST.md)                                      | Temporarily block outbound traffic to Key Vault via NSG, then restore rules and verify connectivity           |
+| 07           | [NSG Firewall Lab](./nsg_firewall_lab/README.md)                                      | Add a deny rule in the NSG to block Key Vault, verify access fails, then remove the rule |
 
 ---
 
