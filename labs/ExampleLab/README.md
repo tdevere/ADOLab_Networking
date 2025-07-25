@@ -10,7 +10,7 @@ You are a DevOps support engineer. The Linux build agent is unreachable due to a
 
 1. **Navigate to the base lab folder:**
    ```powershell
-   cd ../base_lab
+   cd ../ExampleLab
    ```
 2. **Initialize Terraform:**
    ```powershell
@@ -57,7 +57,7 @@ Follow these steps to set up your lab environment:
 1. **Clone the repository and navigate to the base lab folder:**
    ```powershell
    git clone https://github.com/tdevere/ADOLab_Networking.git
-   cd ADOLab_Networking/labs/base_lab
+   cd ADOLab_Networking/labs/ExampleLab
    ```
 2. **Initialize Terraform:**
    ```powershell
@@ -83,95 +83,43 @@ Follow these steps to set up your lab environment:
 
 ---
 
-## Your Tasks
+## Your Tasks (Examples)
 
-1. **Diagnose the Issue**
-   - Attempt to SSH to the agent using the public IP (provided in the outputs or portal).
-   - Check the VM's networking configuration in the Azure Portal.
-   - Use Azure CLI or Portal to verify if the public IP is attached and enabled.
+1. **Deploy the Example Lab**
+   - Use Terraform to provision the lab resources as described above.
+   - Supply scenario variables as needed.
 
-2. **Resolve the Issue**
-   - Re-enable or re-attach the public IP to the Linux agent VM using the Azure Portal or CLI.
-   - Confirm that the agent is reachable via SSH and appears online in the DevOps agent pool.
+2. **Validate Resource Creation**
+   - Confirm that the agent VM, networking, and Key Vault resources are created successfully.
+   - Use Terraform outputs and the Azure Portal to inspect resource properties.
 
-3. **Document Your Steps**
-   - List the troubleshooting steps you performed.
-   - Include screenshots or CLI output showing the resolution.
+3. **Document Your Results**
+   - List the steps you performed to deploy and validate the lab.
+   - Optionally include screenshots or CLI output showing the resources.
 
 ---
 
 ## Detailed Troubleshooting Steps
 
-### 1. Attempt SSH Connection
 
-```bash
-ssh -i ~/.ssh/terraform_lab_key azureuser@$(terraform output -raw agent_vm_public_ip)
-```
+## Example Validation Steps
 
-If you receive a timeout or connection refused, proceed to the next step.
+1. **Check Terraform Outputs**
+   - After `terraform apply`, review the outputs for VM public IP, Key Vault private endpoint, and DNS records.
 
-### 2. Check VM Networking in Azure Portal
+2. **Inspect Resources in Azure Portal**
+   - Confirm the agent VM, networking, and Key Vault resources exist and match your scenario variables.
 
-- Go to the Azure Portal > Virtual Machines > [Your Linux Agent VM].
-- Under **Networking**, verify if a public IP address is listed and attached to the network interface.
-- If no public IP is present, this is likely the cause of the connectivity issue.
+3. **Test SSH Connectivity (Optional)**
+   - If a public IP is provisioned, try:
+     ```bash
+     ssh -i ~/.ssh/terraform_lab_key azureuser@$(terraform output -raw agent_vm_public_ip)
+     ```
 
-### 3. Use Azure CLI to Check Public IP
-
-```bash
-az vm show -g <resource-group> -n <linux-agent-vm-name> --query "networkProfile.networkInterfaces" -o json
-```
-Or list public IPs in the resource group:
-```bash
-az network public-ip list -g <resource-group> -o table
-```
-
-### 4. Re-enable or Attach Public IP
-
-**Azure Portal:**
-- Go to the VM's **Networking** blade.
-- Click on the network interface.
-- Under **IP configurations**, add or enable a public IP address.
-- Save changes.
-
-**Azure CLI:**
-Attach a public IP to the VM's NIC:
-```bash
-az network nic ip-config update --resource-group <resource-group> --nic-name <nic-name> --name <ip-config-name> --public-ip-address <public-ip-name>
-```
-
-### 5. Verify SSH and Agent Pool Status
-
-- Try SSH again:
-  ```bash
-  ssh -i ~/.ssh/terraform_lab_key azureuser@<linux-agent-public-ip>
-  ```
-- Check the agent status in Azure DevOps agent pool.
-
-### 6. Document Your Resolution
-
-- List the steps you performed.
-- Include screenshots or CLI output showing the VM's networking before and after the fix.
-- Note the agent's status in Azure DevOps after resolution.
-
----
-
-## Notes
-
-- **Do not use Terraform to fix the issue.** The lab is designed to simulate a real-world scenario where you must use Azure operational tools.
-- If you need to roll back, contact your instructor or use the provided rollback instructions (if any).
-
----
-
-## Example Error Message
-
-```
-##[error]The agent is not responding. Check network connectivity and firewall settings.
-```
+4. **Document Your Results**
+   - List the steps you performed and any outputs or screenshots that validate the lab deployment.
 
 ---
 
 ## Resources
-- [Troubleshoot VM connectivity in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/troubleshooting/connectivity)
 - [Azure CLI Reference](https://learn.microsoft.com/en-us/cli/azure/)
-- [Azure DevOps Agent Pools](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/pools-queues)

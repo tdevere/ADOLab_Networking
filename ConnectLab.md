@@ -3,7 +3,7 @@
 
 ## Overview
 
-![alt text](image.png)
+![alt text](/img/image.png)
 
 This Terraform-driven lab builds **two** Azure environments:
 
