@@ -113,6 +113,8 @@ Before registering your agents, you need a Personal Access Token (PAT) with the 
 
 ### Exercise 2: Create an Agent Pool
 
+#### **Option A: Using Azure DevOps Portal (Recommended for Beginners)**
+
 1. Sign in to your Azure DevOps organization.
 2. Go to **Organization Settings → Agent Pools**.
 3. Click **Add pool**.
@@ -120,6 +122,95 @@ Before registering your agents, you need a Personal Access Token (PAT) with the 
    * **Name**: `SelfHostedLabPool`
    * **Type**: Self‑hosted
 4. Click **Create**.
+
+#### **Option B: Using Azure CLI (Alternative Approach)**
+
+You can also create the agent pool using the Azure DevOps CLI extension:
+
+1. **Install Azure DevOps CLI extension** (if not already installed):
+   ```bash
+   az extension add --name azure-devops
+   ```
+
+2. **Configure Azure DevOps CLI** with your organization:
+   ```bash
+   # Set your organization URL as default
+   az devops configure --defaults organization=https://dev.azure.com/yourorg
+   
+   # Login with your PAT (you'll be prompted for the token)
+   az devops login
+   ```
+
+3. **Create the agent pool**:
+   ```bash
+   # Create a self-hosted agent pool
+   az pipelines pool create \
+     --name "SelfHostedLabPool" \
+     --pool-type "SelfHosted" \
+     --auto-provision false \
+     --auto-update false
+   ```
+
+4. **Verify the pool was created**:
+   ```bash
+   # List all agent pools to confirm creation
+   az pipelines pool list --query "[?name=='SelfHostedLabPool'].{Name:name,Id:id,PoolType:poolType}" --output table
+   ```
+
+5. **Optional: Get pool details**:
+   ```bash
+   # Get detailed information about the pool
+   az pipelines pool show --pool-name "SelfHostedLabPool"
+   ```
+
+**CLI Benefits:**
+- ✅ **Scriptable and repeatable** for automation
+- ✅ **Version control friendly** - commands can be saved in scripts
+- ✅ **Faster for experienced users** who prefer command-line workflows
+- ✅ **Integration ready** - can be incorporated into setup scripts
+
+**Portal Benefits:**
+- ✅ **Visual interface** easier for beginners
+- ✅ **Guided experience** with form validation
+- ✅ **Immediate visual feedback** of configuration options
+
+#### **CLI Troubleshooting Tips:**
+
+If you encounter issues with the CLI approach:
+
+**Authentication Issues:**
+```bash
+# Clear cached credentials and re-login
+az devops logout
+az devops login
+
+# Verify your organization URL is correct
+az devops configure --list
+```
+
+**Permission Issues:**
+```bash
+# Verify your PAT has the correct scopes
+# Required scopes: Agent Pools (read, manage)
+# You can check this in Azure DevOps → User Settings → Personal Access Tokens
+```
+
+**Extension Issues:**
+```bash
+# Update the Azure DevOps extension to latest version
+az extension update --name azure-devops
+
+# List installed extensions
+az extension list --query "[?name=='azure-devops']"
+```
+
+**Verification:**
+```bash
+# Alternative verification using REST API
+curl -u ":YOUR_PAT" \
+  "https://dev.azure.com/yourorg/_apis/distributedtask/pools?api-version=6.0" \
+  | jq '.value[] | select(.name=="SelfHostedLabPool")'
+```
 
 ---
 

@@ -60,7 +60,6 @@ resource "azurerm_subnet_network_security_group_association" "agent_assoc" {
 
 # Public IP, NIC, VM
 resource "azurerm_public_ip" "vm_public_ip" {
-  count               = var.lab_scenario == "Linux_Connectivity_Issue_01" ? 0 : 1
   name                = var.public_ip_name
   location            = azurerm_resource_group.agent_rg.location
   resource_group_name = azurerm_resource_group.agent_rg.name
@@ -76,7 +75,7 @@ resource "azurerm_network_interface" "vm_nic" {
     name                          = "ipconfig1"
     subnet_id                     = azurerm_subnet.agent_subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = var.lab_scenario == "Linux_Connectivity_Issue_01" ? null : azurerm_public_ip.vm_public_ip[0].id
+    public_ip_address_id          = var.lab_scenario == "Linux_Connectivity_Issue_01" ? null : azurerm_public_ip.vm_public_ip.id
   }
 }
 
@@ -257,6 +256,7 @@ resource "azurerm_network_interface" "win_nic" {
 # Windows VM
 resource "azurerm_windows_virtual_machine" "agent_win" {
   name                = "${var.vm_name}-win"
+  computer_name       = "win-agent"
   location            = azurerm_resource_group.agent_rg.location
   resource_group_name = azurerm_resource_group.agent_rg.name
   network_interface_ids = [azurerm_network_interface.win_nic.id]
